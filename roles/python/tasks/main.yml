@@ -1,0 +1,40 @@
+---
+# Tasks for python role
+
+- name: Install dateutil flask ipython pip requests
+  sudo: False 
+  shell: $HOME/miniconda/bin/conda install --yes -q {{ item }} executable=/bin/bash
+  with_items:
+    - dateutil 
+    - flask 
+    - ipython 
+    - pip 
+    - requests 
+
+# Web application configuration
+
+- name: Install gunicorn for deploying apps behind nginx
+  sudo: False
+  pip: name=gunicorn state=present executable={{ anaconda_home }}/bin/pip
+
+- name: Install flask-restful extension for building a restful api
+  sudo: False
+  pip: name=Flask-RESTful state=present executable={{ anaconda_home }}/bin/pip
+
+# Semantic Web libraries
+
+- name: Install rdflib library for managing rdf data
+  sudo: False
+  pip: name=rdflib state=present executable={{ anaconda_home }}/bin/pip
+
+- name: Install rdflib-jsonld extension for managing json-ld data
+  sudo: False
+  pip: name=rdflib-jsonld state=present executable={{ anaconda_home }}/bin/pip
+
+- name: Install pyld library for converting json-ld
+  sudo: False
+  pip: name=pyld state=present executable={{ anaconda_home }}/bin/pip
+
+- name: Install prov library branch that supports rdf
+  sudo: False
+  pip: name=https://github.com/satra/prov/archive/enh/rdf.zip state=present executable={{ anaconda_home }}/bin/pip

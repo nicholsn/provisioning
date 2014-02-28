@@ -1,0 +1,9 @@
+---
+# Tasks for niquery role
+
+- name: Copy niquery app into /srv directory
+  shell: /bin/cp -r /vagrant/{{ app_name }} {{ webapps_dir }}/{{ app_name }}
+  
+- name: include supervisor.ini for niquery app
+  template: src=supervisor.ini.j2 dest=/etc/supervisor/niquery.ini
+  notify: restart supervisord

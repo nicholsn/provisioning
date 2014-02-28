@@ -1,0 +1,34 @@
+---
+# Playbook for common role
+
+- name: Update aptitude cache
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Upgrade packages
+  apt: upgrade=dist
+  when: upgrade_packages == "True"
+
+- name: Install python-software-properties to support add-apt-reposity
+  apt: pkg=python-software-properties state=present
+
+# Install miniconda python distribution
+
+- name: Download miniconda python distribution
+  sudo: False
+  get_url: url=http://repo.continuum.io/miniconda/Miniconda-3.0.0-Linux-x86_64.sh dest=/tmp/miniconda.sh mode=0755
+
+- name: Execute the miniconda setup script
+  sudo: False
+  shell: /tmp/miniconda.sh -b creates={{ anaconda_home }} executable=/bin/bash
+
+- name: Add miniconda to the PATH
+  sudo: False
+  shell: echo "export PATH=\$HOME/miniconda/bin:\$PATH" >> $HOME/.bashrc executable=/bin/bash
+
+- name: Update conda to latest version
+  sudo: False
+  shell: $HOME/miniconda/bin/conda update conda --yes -q executable=/bin/bash
+
+- name: Install pip
+  sudo: False
+  shell: $HOME/miniconda/bin/conda install pip --yes -q executable=/bin/bash

@@ -1,0 +1,12 @@
+---
+# Playbook for redis role
+
+- name: Install redis
+  apt: pkg=redis-server state=present
+
+- name: Ensure redis log directory exists
+  file: dest=/var/log/redis state=directory
+
+- name: include supervisor.ini for redis
+  template: src=supervisor.ini.j2 dest=/etc/supervisor/redis.ini
+  notify: restart supervisord

@@ -1,0 +1,8 @@
+[niquery-webserver]
+192.168.100.10
+
+[niquery-container]
+localhost              ansible_connection=local
+
+[base-container]
+localhost              ansible_connection=local

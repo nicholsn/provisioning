@@ -1,0 +1,10 @@
+---
+# Tasks for celery role
+
+- name: Install celery with redis extension for task management
+  sudo: False
+  pip: name=celery[redis] state=present executable={{ anaconda_home }}/bin/pip
+
+- name: Install flower extension for building monitoring celery
+  sudo: False
+  pip: name=flower state=present executable={{ anaconda_home }}/bin/pip

@@ -1,0 +1,6 @@
+[program:flower]
+command={{ anaconda_home }}/bin/celery flower --port={{ webapp_port }} --broker=redis://127.0.0.1:{{ redis_port }}/{{ redis_db }}
+directory=/srv
+autostart=true
+autorestart=true
+redirect_stderr=true

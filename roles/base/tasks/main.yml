@@ -1,5 +1,5 @@
 ---
-# Playbook for common role
+# Playbook for base role
 
 - name: Update aptitude cache
   apt: update_cache=yes cache_valid_time=3600
@@ -19,11 +19,11 @@
 
 - name: Execute the miniconda setup script
   sudo: False
-  shell: /tmp/miniconda.sh -b creates={{ anaconda_home }} executable=/bin/bash
+  shell: /tmp/miniconda.sh -b creates={{ miniconda_home }} executable=/bin/bash
 
 - name: Add miniconda to the PATH
   sudo: False
-  shell: echo "export PATH=\$HOME/miniconda/bin:\$PATH" >> $HOME/.bashrc executable=/bin/bash
+  shell: echo "export PATH=$HOME/miniconda/bin:$PATH" >> $HOME/.bashrc executable=/bin/bash
 
 - name: Update conda to latest version
   sudo: False

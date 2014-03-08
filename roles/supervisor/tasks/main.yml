@@ -3,7 +3,7 @@
   
 - name: Install supervisor for managing processes
   sudo: False
-  pip: name=supervisor state=present executable={{ anaconda_home }}/bin/pip
+  pip: name=supervisor state=present executable={{ miniconda_home }}/bin/pip
   
 - name: Create supervisord config folder
   file: dest=/etc/supervisor state=directory owner=root
@@ -15,10 +15,10 @@
   copy: src=supervisord.sh dest=/etc/init.d/supervisord mode=0755 
 
 - name: Link supervisord script
-  file: src={{ anaconda_home }}/bin/supervisord dest=/usr/local/bin/supervisord state=link mode=0755
+  file: src={{ miniconda_home }}/bin/supervisord dest=/usr/local/bin/supervisord state=link mode=0755
 
 - name: Link supervisorctl script
-  file: src={{ anaconda_home }}/bin/supervisorctl dest=/usr/local/bin/supervisorctl state=link mode=0755
+  file: src={{ miniconda_home }}/bin/supervisorctl dest=/usr/local/bin/supervisorctl state=link mode=0755
 
 - name: Start supervisord service and have it run during system startup
   service: name=supervisord state=started enabled=yes

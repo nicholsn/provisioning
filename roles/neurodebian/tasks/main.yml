@@ -1,0 +1,11 @@
+---
+# Tasks for the neurodebian role
+
+- name: Get the neurodebian sources
+  get_url: url=http://neuro.debian.net/lists/precise.us-ca.full dest=/etc/apt/sources.list.d/neurodebian.sources.list
+
+- name: Set neurodebian key server
+  shell: /usr/bin/apt-key adv --recv-keys --keyserver pgp.mit.edu 2649A5A9
+
+- name: Update aptitude cache
+  apt: update_cache=yes cache_valid_time=3600

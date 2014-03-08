@@ -1,5 +1,6 @@
 [program:flower]
-command={{ anaconda_home }}/bin/celery flower --port={{ webapp_port }} --broker=redis://127.0.0.1:{{ redis_port }}/{{ redis_db }}
+; use docker service discovery (e.g., REDIS_PORT_80_TCP_ADDR)
+command={{ miniconda_home }}/bin/celery flower --port={{ flower_port }} --broker=redis://$REDIS_PORT_80_TCP_ADDR:{{ redis_port }}/{{ redis_db }}
 directory=/srv
 autostart=true
 autorestart=true

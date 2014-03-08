@@ -6,8 +6,9 @@
   sudo: yes
 
   roles:
-    - common
-    - conda
+    - base
+    - neurodebian
+    - python
     - supervisor
     - nginx
     - celery

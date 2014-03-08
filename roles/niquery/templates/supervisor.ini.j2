@@ -1,5 +1,5 @@
 [program:niquery]
-command = {{ anaconda_home }}/bin/gunicorn
+command = {{ miniconda_home }}/bin/gunicorn
 	--bind 127.0.0.1:{{ webapp_port }}
 	--workers 4
 	--max-requests 1000

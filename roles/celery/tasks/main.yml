@@ -3,8 +3,15 @@
 
 - name: Install celery with redis extension for task management
   sudo: False
-  pip: name=celery[redis] state=present executable={{ anaconda_home }}/bin/pip
+  pip: name=celery[redis] state=present executable={{ miniconda_home }}/bin/pip
 
 - name: Install flower extension for building monitoring celery
   sudo: False
-  pip: name=flower state=present executable={{ anaconda_home }}/bin/pip
+  pip: name=flower state=present executable={{ miniconda_home }}/bin/pip
+
+- name: Create celery user since celery not meant to be run as root
+  user: name=celery
+
+- name: include supervisor.ini for flower
+  template: src=supervisor.ini.j2 dest=/etc/supervisor/flower.ini
+  notify: restart supervisord

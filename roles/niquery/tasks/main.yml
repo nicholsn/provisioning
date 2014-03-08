@@ -1,8 +1,8 @@
 ---
 # Tasks for niquery role
 
-- name: Copy niquery app into /srv directory
-  shell: /bin/cp -r /vagrant/{{ app_name }} {{ webapps_dir }}/{{ app_name }}
+- name: Checkout niquery app into webapps_dir directory
+  git: repo=https://github.com/niquery/niquery.git dest={{ webapps_dir }}/{{ app_name }}
   
 - name: include supervisor.ini for niquery app
   template: src=supervisor.ini.j2 dest=/etc/supervisor/niquery.ini
